@@ -6,10 +6,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    location: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true
@@ -24,4 +20,4 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model('user', userSchema);

@@ -20,7 +20,6 @@ const FoodState = (props) => {
     });
     const json = await response.json()
     setFoods(json)
-    console.log("hello")
   }
 
   const pfoodsInitial = [];
@@ -93,7 +92,7 @@ const FoodState = (props) => {
   }
 
     // adding food
-    const addFood = async(name, description) => {
+    const addFood = async(name, description, img) => {
       // api call
       const response = await fetch(`${host}/api/foods/addFood`, {
         method: "POST",
@@ -102,7 +101,7 @@ const FoodState = (props) => {
           "auth-token":
           localStorage.getItem('token'),
         },
-        body: JSON.stringify({ name, description}),
+        body: JSON.stringify({ name, description, img}),
       });
       const food = await response.json();
       //cleint side 

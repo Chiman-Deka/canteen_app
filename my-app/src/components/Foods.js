@@ -24,8 +24,8 @@ const Foods  = () => {
                 <div className="container mx-2">
                 {pfoods.length === 0 && 'No foods to display'}
                 </div>
-                {pfoods.map((food) => {
-                    return <FoodItem food={food} />
+                {pfoods.map((food,i) => {
+                    return <FoodItem food={food} key={i}/>
                 })}
             </div>
         </div>

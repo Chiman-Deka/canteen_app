@@ -16,7 +16,12 @@ const foodSchema = new Schema({
     },
     img:{
         type: String,
-        default: 'https://source.unsplash.com/random/300%C3%97300?food'
+        required: true
+        // default: 'https://source.unsplash.com/random/300%C3%97300?food'
+    },
+    price: {
+        type: Number,
+        required: true
     }
 });
 

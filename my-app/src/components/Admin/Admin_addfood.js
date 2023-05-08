@@ -6,11 +6,12 @@ const Admin_addfood = () => {
     const context = useContext(foodContext);
     const { addFood } = context;
 
-    const [food, setFood] = useState({ name: "", description: "" })
+    const [food, setFood] = useState({ name: "", description: "", img: "" })
 
     const handleClick = (e) => {
+        const img = "https://source.unsplash.com/random/300%C3%97300?";
         e.preventDefault(); 
-        addFood(food.name, food.description );      // addNote from the NoteState.js
+        addFood(food.name, food.description , img+food.name);      // addNote from the NoteState.js
         setFood({ name: "", description: "", tag: "" })
 
         // postDetails();
@@ -38,7 +39,6 @@ const Admin_addfood = () => {
 
     const onChange = (e) => {
         setFood({ ...food, [e.target.name]: e.target.value })    // name of <input> == value (whatever entered)
-        console.log(food)
     }
     
     // const onChangefile = (e) => {
@@ -57,6 +57,10 @@ const Admin_addfood = () => {
                     <label htmlFor="description" className="form-label">Description</label>
                     <input type="text" className="form-control" id="description" value={food.description} name="description" onChange={onChange} minLength={5} required />
                 </div>
+                {/* <div className="mb-2">
+                    <label htmlFor="img" className="form-label">Image</label>
+                    <input type="file" className="form-control" id="img" value={food.img} name="img" onChange={onChange} required />
+                </div> */}
                 {/* <div className="mb-3">
                     <label htmlFor="formFile" className="form-label">Default file input example</label>
                     <input className="form-control" type="file" id="formFile" onChange = {onChangefile } />

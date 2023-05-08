@@ -23,10 +23,11 @@ const fetchallFoods = async (req, res) => {
 const addFood = async (req, res) => {
   try {
     try {
-      const { name, description } = req.body;     
+      const { name, description, img } = req.body;     
       const food = new Food({     
         name,
         description,
+        img,
         user: req.user.id,
       });
       const savedfood = await food.save();  

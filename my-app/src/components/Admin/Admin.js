@@ -7,6 +7,9 @@ const Admin  = () => {
     const clicked_food = () => {
         history('/foods')
     }
+    const clicked_Orders = () =>{
+        history('/orders')
+    }
     // const clicked_team = () => {
     //     history('/team')
     // }
@@ -16,7 +19,7 @@ const Admin  = () => {
             <div className="d-grid gap-2 col-6 mx-auto">
                 {/* <button className="btn btn-primary btn-dark" type="button" onClick={clicked}>Events</button> */}
                 <button className="btn btn-primary btn-dark" type="button" onClick={clicked_food}>Food</button>
-                <button className="btn btn-primary btn-dark" type="button">Pending Orders</button>
+                <button className="btn btn-primary btn-dark" type="button" onClick={clicked_Orders}>Pending Orders</button>
             </div>
         </div>
 

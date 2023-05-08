@@ -11,26 +11,26 @@ const FoodItem = (props) => {
         <div className="col-md-3">
             <div className="card my-3">
                 <div className="card-body">
-                    <img class="card-img-top" src="https://source.unsplash.com/random/300x300?food" alt="Card image cap"/>
+                    <img className="card-img-top" src={food.img} alt="Card image cap"/>
                     <div className="d-flex align-items-center">
                         <h5 className="card-title">{food.name}</h5>
                     </div>
                     <p className="card-text">{food.description} </p>
-                    <select className='m-2 h-100 bg-success rounded'>
+                    <select className='mr-3 my-1 h-100 bg-success rounded'>
                         {
                             Array.from(Array(6), (e, i)=>(
                                     <option key={i+1} value={i+1}>{i+1}</option>
                                 ))
                         }
                     </select>
-                    <select className='m-2 h-100 bg-success rounded'>
+                    <select className='mr-3 my-1 h-100 bg-success rounded'>
                         {
                             Array.from(Array(10), (e, i)=>(
                                     <option key={i+1} value={i+1}>Table Number{i+1}</option>
                                 ))
                         }
                     </select>
-                    <div className="btn btn-success">Order Now</div>
+                    <div className="btn btn-outline-success">Order Now</div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,16 @@
+
+.front {
+    background-image: url("../images/canteen.jpg");
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+.come{
+    text-align: center;
+    padding-top: 2%;
+}
+
+.come h2{
+    font-family: 'Bangers', cursive;
+}

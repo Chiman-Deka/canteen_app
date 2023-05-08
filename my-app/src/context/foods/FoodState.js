@@ -3,14 +3,15 @@ import foodContext from "./foodContext";
 
 const FoodState = (props) => {
   const host = "http://localhost:5000";
+  // api/foods/fetchallFoods
   const foodsInitial = [];
   const [foods, setFoods] = useState(foodsInitial)
-
+  // console.log(localStorage.getItem('token'))
   // Get all foods---------------------------
-  const getfoods = async() => {
+  const getFoods = async() => {
     // api call
-    const response = await fetch(`${host}/api/foods/fetchallfoods`, {
-      method: "GET",
+    const response = await fetch(`${host}/api/foods/fetchallFoods`, {
+      method: "GET", 
       headers: {
         "Content-Type": "application/json",
         "auth-token":
@@ -18,28 +19,30 @@ const FoodState = (props) => {
       },
     });
     const json = await response.json()
-    setfoods(json)
+    setFoods(json)
+    console.log("hello")
   }
 
   const pfoodsInitial = [];
-  const [pfoods, psetfoods] = useState(pfoodsInitial)
-  const getfoodsPublic = async() => {
+  const [pfoods, psetFoods] = useState(pfoodsInitial)
+  const getFoodsPublic = async() => {
     // api call
-    const response = await fetch(`${host}/api/foods/pnotes`, {
+    const response = await fetch(`${host}/api/foods/pfoods`, {
       // const response = await fetch(`${host}/api/foods/fetchallfoods`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
     });
     const json = await response.json()
-    psetfoods(json)
+    psetFoods(json)
+    console.log("public")
   }
 
   // Delete food------------------------------
-  const deletefood = async(id) => {
+  const deleteFood = async(id) => {
     // api call
-    const response = await fetch(`${host}/api/foods/deletefood/${id}`, {
+    const response = await fetch(`${host}/api/foods/deleteFood/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -51,20 +54,20 @@ const FoodState = (props) => {
     console.log(json)
 
     // deleting client side
-    const newfoods = foods.filter((food) => {
+    const newFoods = foods.filter((food) => {
       // filter creates a new array by removing elements that don't belong.....The filter() method creates a new array....The filter() method does not change the original array
       return food._id !== id;
     });
-    setfoods(newfoods);
+    setFoods(newFoods);
 
   }
 
 
 
   // update food---------------------------------
-  const editfood = async (id, title, description) => {
+  const editFood = async (id, title, description) => {
     // api call
-    const response = await fetch(`${host}/api/foods/updatefood/${id}`, {
+    const response = await fetch(`${host}/api/foods/updateFood/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -76,46 +79,46 @@ const FoodState = (props) => {
     const json = await response.json();
     console.log(json);
 
-    let newfoods = JSON.parse(JSON.stringify(foods))
+    let newFoods = JSON.parse(JSON.stringify(foods))
     // logic to edit in client side
-    for (let index = 0; index < newfoods.length; index++) {
-      const element = newfoods[index];
+    for (let index = 0; index < newFoods.length; index++) {
+      const element = newFoods[index];
       if(element._id === id){
-        newfoods[index].title = title;
-        newfoods[index].description = description;
+        newFoods[index].title = title;
+        newFoods[index].description = description;
         break;
       }
     }
-    setfoods(newfoods);
+    setFoods(newFoods);
   }
 
     // adding food
-    const addfood = async(title, description, url) => {
+    const addFood = async(name, description) => {
       // api call
-      const response = await fetch(`${host}/api/foods/addfood`, {
+      const response = await fetch(`${host}/api/foods/addFood`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "auth-token":
           localStorage.getItem('token'),
         },
-        body: JSON.stringify({ title, description, url }),
+        body: JSON.stringify({ name, description}),
       });
       const food = await response.json();
       //cleint side 
-    setfoods(foods.concat(food))
+    setFoods(foods.concat(food))
     }
 
   
     return (
       <foodContext.Provider
-        value={{ pfoods, foods, getfoods, getfoodsPublic, setfoods, editfood, deletefood, addfood}}
+        value={{ pfoods, foods, getFoods, getFoodsPublic, setFoods, editFood, deleteFood, addFood}}
       >
         {props.children}
       </foodContext.Provider>
     );
 };
-export default foodState;
+export default FoodState;
 
 
 

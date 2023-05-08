@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
-import eventContext from '../../context/events/eventContext';
+import foodContext from '../../context/foods/foodContext';
 
-const EventItem = (props) => {
-    const context = useContext(eventContext);
-    const { deleteEvent } = context;
+const FoodItem = (props) => {
+    const context = useContext(foodContext);
+    const { deleteFood } = context;
 
-    const { event, updateEvent } = props;
+    // const { food, showAlert, updateFood } = props;
+    const food = props.event;
+    const updateFood = props.updateFood;
+    
     return (
   
         <div className="col-md-3">
@@ -13,15 +16,15 @@ const EventItem = (props) => {
             <img src="..." className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <div className="d-flex align-items-center">
-                        <h5 className="card-title">{event.title}</h5>
-                        <i className="fa-solid fa-trash mx-2" onClick={()=>{deleteEvent(event._id); props.showAlert("Deleted Succesfully", "success")}}></i>
-                        <i className="fa-solid fa-user-pen" onClick={()=> {updateEvent(event)}}></i>
+                        <h5 className="card-title">{food.name}</h5>
+                        <i className="fa-solid fa-trash mx-2" onClick={()=>{deleteFood(food._id); props.showAlert("Deleted Succesfully", "success")}}></i>
+                        <i className="fa-solid fa-user-pen" onClick={()=> {updateFood(food)}}></i>
                     </div>
-                    <p className="card-text">{event.description} </p>
+                    <p className="card-text">{food.description} </p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default EventItem;
+export default FoodItem;

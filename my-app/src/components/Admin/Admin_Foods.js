@@ -1,20 +1,20 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import Adminaddevent from './Admin_addevent';
-import eventContext from '../../context/events/eventContext';
-import EventItem from './Admin_event_item';
+import Admin_addfood from './Admin_addfood';
+import foodContext from '../../context/foods/foodContext';
+import FoodItem from './Admin_foodItem';
 import { useNavigate } from 'react-router-dom';
 
-const Admin_events = (props) => {
-    const context = useContext(eventContext);
+const Admin_foods = (props) => {
+    const context = useContext(foodContext);
     let history = useNavigate();
-    const { events, getEvents, editEvent } = context || {};
+    const { foods, getFoods, editFood } = context || {};
     // useEffect(() => {
     //     getEvents()     // all the events are fetched
     //     // eslint-disable-next-line
     // }, []);
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            getEvents()              // all notes have been fetched
+            getFoods()              // all notes have been fetched
         }      
         else{
             history('/login')
@@ -23,29 +23,29 @@ const Admin_events = (props) => {
 
     const ref = useRef(null);
     const refClose = useRef(null);
-    const [event, setEvent] = useState({ id: "", etitle: "", edescription: "" })
+    const [food, setFood] = useState({ id: "", etitle: "", edescription: "" })
 
-    const updateEvent = (currentEvent) => {
+    const updateFood = (currentFood) => {
         ref.current.click();
-        setEvent({ id: currentEvent._id, etitle: currentEvent.title, edescription: currentEvent.description })
+        setFood({ id: currentFood._id, etitle: currentFood.name, edescription: currentFood.description })
     }
 
     const handleClick = (e) => {
-        editEvent(event.id, event.etitle, event.edescription)
+        editFood(food.id, food.etitle, food.edescription)
         refClose.current.click();
         props.showAlert("Updated Successfully", "success")
     }
 
     const onChange = (e) => {
-        setEvent({ ...event, [e.target.name]: e.target.value })    // name of <input> == value (whatever entered)
+        setFood({ ...food, [e.target.name]: e.target.value })    // name of <input> == value (whatever entered)
     }
 
     return (
         <>
             <h1 className="text-center">Events Section</h1>
-            <p className="mb-5 text-center">You can view, add, edit, delete an event</p>
+            <p className="mb-5 text-center">You can view, add, edit, delete an Food Item</p>
 
-            <Adminaddevent showAlert={props.showAlert}/>
+            <Admin_addfood showAlert={props.showAlert}/>
 
             <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
@@ -54,35 +54,35 @@ const Admin_events = (props) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Note</h1>
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Food Item</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <form className="my-3">
                                 <div className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
-                                    <input type="text" className="form-control" id="etitle" name="etitle" value={event.etitle} minLength={5} required aria-describedby="emailHelp" onChange={onChange} />
+                                    <input type="text" className="form-control" id="etitle" name="etitle" value={food.etitle} minLength={5} required aria-describedby="emailHelp" onChange={onChange} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
-                                    <input type="text" className="form-control" id="edescription" name="edescription" value={event.edescription} onChange={onChange} minLength={5} required />
+                                    <input type="text" className="form-control" id="edescription" name="edescription" value={food.edescription} onChange={onChange} minLength={5} required />
                                 </div>
                             </form>
                         </div>
                         <div className="modal-footer">
                             <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" disabled={event.etitle.length<5 || event.edescription.length<5} onClick={handleClick} className="btn btn-primary">Update Event</button>
+                            <button type="button" disabled={food.etitle.length<5 || food.edescription.length<5} onClick={handleClick} className="btn btn-primary">Update Food Item</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="row my-3">
-                <h2>Your Events</h2>
+                <h2>Your Food Items</h2>
                 <div className="container mx-2">
-                {events.length ===0 && 'No events to display'}
+                {foods.length === 0 && 'No events to display'}
                 </div>
-                {events.map((event) => {
-                    return <EventItem event={event} key={event._id} showAlert={props.showAlert} updateEvent={updateEvent} />
+                {foods.map((food) => {
+                    return <FoodItem event={food} key={food._id} showAlert={props.showAlert} updateFood={updateFood} />
                 })}
             </div>
         </>
@@ -90,4 +90,4 @@ const Admin_events = (props) => {
     )
 }
 
-export default Admin_events;
+export default Admin_foods;

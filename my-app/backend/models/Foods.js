@@ -14,9 +14,9 @@ const foodSchema = new Schema({
         type: String,
         required: true
     },
-    time: {
-        type: Number,
-        default: (new Date()).getTime()
+    img:{
+        type: String,
+        default: 'https://source.unsplash.com/random/300%C3%97300?food'
     }
 });
 
